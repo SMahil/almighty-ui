@@ -1,5 +1,5 @@
-<div class="width100 fl marginT20">
-  <div id="workItemQuickAdd_container" class="width100 fl">
+<div class="width100 fl quickAdd_container" id="workItemQuickAdd_container" >
+  <!--<div id="workItemQuickAdd_container" class="width100 fl">
     <div class="col-md-3 col-sm-12 col-xs-12 padB5">
       <p class="width100 fl font16">Quick Add a WorkItem</p>
     </div>
@@ -38,5 +38,22 @@
         </div>
       </div>
     </div>
+  </div>-->
+  <div class="width100 fl addWorkItem" (click)="showQuickAddWI()" [ngClass]="{'db' : QuickAddWI, 'dn' : !QuickAddWI}">
+    <a id="workItemQuickAdd_saveBtn" class="workItemQuickAdd_saveBtn">
+      <i class='pficon-add-circle-o dib font18'></i>
+    </a>
+    <h4>Add a WorkItem</h4>
+  </div>
+  <div class="width100 fl addWorkItemBlk " *ngIf="showQuickAdd">
+    <div class="workItemQuickAdd_IconType">
+      <i class="fa fa-bookmark fl "></i>
+    </div>
+    <div class=" workItemQuickAdd_storyInput">
+      <input type="text" id="exampleInput" class="form-control width100 fl"  [(ngModel)]="workItem.fields['system.title']" 
+             (keyup.enter)="save()"
+            (keyup)="checkTitle()" placeholder="A New Story" required/>
+    </div>
+    <span class="fr font16 workItemQuickAdd_Add" (click)="addWorkItemBtn()" [ngClass]="{'icon-btn': validTitle,'icon-btn-disabled':!validTitle}">Add</span>
   </div>
 </div>

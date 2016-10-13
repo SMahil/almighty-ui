@@ -29,5 +29,21 @@
 }
 .containerPaddT{ padding: 72px 0 0 0; }
 @media (max-width: $grid-float-breakpoint){
-    .containerPaddT{ padding: 3em 0 0 0; }
+  .containerPaddT{ padding: 3em 0 0 0; }
+  .workItem_Overlay{
+    background-color:#000;
+    left:0;
+    height:0;
+    width:0;
+    position:fixed;
+    top:0;
+    z-index:9;
+    @include transition(opacity .3s);
+  }
+  .activeOvrly {
+    height: 100%;
+    @include transition(opacity .3s);
+    opacity: .7;
+    width: 100%;
+  }
 }

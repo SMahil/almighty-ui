@@ -16,6 +16,8 @@ export class WorkItemQuickAddComponent implements OnInit {
   error: any = false;
   workItem: WorkItem;
   validTitle: Boolean;
+  showQuickAdd: Boolean = false;
+  QuickAddWI: Boolean = true;
 
   constructor(
     private workItemService: WorkItemService,
@@ -36,29 +38,29 @@ export class WorkItemQuickAddComponent implements OnInit {
     } as WorkItem;
   }
 
-  save(): void {
-    if (this.workItem.fields['system.title'] != null) {
-      this.workItem.fields['system.title'] = this.workItem.fields['system.title'].trim();
-    }
-    if (this.workItem.fields['system.description'] != null) {
-      this.workItem.fields['system.description'] = this.workItem.fields['system.description'].trim();
-    }
-    if (this.workItem.fields['system.title']) {
-      this.workItemService
-        .create(this.workItem)
-        .then(workItem => {
-          this.workItem = workItem; // saved workItem, w/ id if new
-          this.logger.log(`created and returned this workitem:` + JSON.stringify(workItem));
-          this.workItem.fields['system.description'] = '';
-          this.workItem.fields['system.title'] = '';
-          this.validTitle = false;
-          this.goBack(workItem);
-        })
-        .catch(error => this.error = error); // TODO: Display error message
-    } else {
-      this.error = 'Title can not be empty.';
-    }
-  }
+  //save(): void {
+    //if (this.workItem.fields['system.title'] != null) {
+      //this.workItem.fields['system.title'] = this.workItem.fields['system.title'].trim();
+   // }
+    //if (this.workItem.fields['system.description'] != null) {
+      //this.workItem.fields['system.description'] = this.workItem.fields['system.description'].trim();
+    //}
+    //if (this.workItem.fields['system.title']) {
+      //this.workItemService
+        //.create(this.workItem)
+        //.then(workItem => {
+          //this.workItem = workItem; // saved workItem, w/ id if new
+          //this.logger.log(`created and returned this workitem:` + JSON.stringify(workItem));
+          //this.workItem.fields['system.description'] = '';
+          //this.workItem.fields['system.title'] = '';
+          //this.validTitle = false;
+          //this.goBack(workItem);
+        //})
+        //.catch(error => this.error = error); // TODO: Display error message
+    //} else {
+      //this.error = 'Title can not be empty.';
+   // }
+ // }
 
   checkTitle(): void {
     if (this.workItem.fields['system.title'] && this.workItem.fields['system.title'].trim()) {
@@ -72,4 +74,30 @@ export class WorkItemQuickAddComponent implements OnInit {
     this.close.emit(savedWorkItem);
     this.ngOnInit();
   }
+
+  showQuickAddWI(): void {
+    this.showQuickAdd = true;
+  } 
+
+  addWorkItemBtn(): void {
+    if (this.workItem.fields['system.title'] != null) {
+      this.workItem.fields['system.title'] = this.workItem.fields['system.title'].trim();
+      this.showQuickAdd = false;
+    }
+    if (this.workItem.fields['system.title']) {
+        this.workItemService
+        .create(this.workItem)
+        .then(workItem => {
+          this.workItem = workItem; // saved workItem, w/ id if new
+          this.logger.log(`created and returned this workitem:` + JSON.stringify(workItem));
+          this.workItem.fields['system.title'] = '';
+          this.validTitle = false;
+          this.goBack(workItem);
+        })
+        .catch(error => this.error = error); // TODO: Display error message
+    } else {
+      this.error = 'Title can not be empty.';
+    }
+  }
+
 }
