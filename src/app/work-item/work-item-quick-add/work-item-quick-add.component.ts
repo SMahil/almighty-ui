@@ -16,8 +16,8 @@ export class WorkItemQuickAddComponent implements OnInit {
   error: any = false;
   workItem: WorkItem;
   validTitle: Boolean;
-  showQuickAdd: Boolean = false;
-  QuickAddWI: Boolean = true;
+  showQuickAdd: Boolean;
+  showQuickAddBtn: Boolean;
 
   constructor(
     private workItemService: WorkItemService,
@@ -36,31 +36,33 @@ export class WorkItemQuickAddComponent implements OnInit {
       'type': 'system.userstory',
       'version': 0
     } as WorkItem;
+    this.showQuickAdd = false;
+    this.showQuickAddBtn = true;
   }
 
-  //save(): void {
-    //if (this.workItem.fields['system.title'] != null) {
-      //this.workItem.fields['system.title'] = this.workItem.fields['system.title'].trim();
-   // }
-    //if (this.workItem.fields['system.description'] != null) {
-      //this.workItem.fields['system.description'] = this.workItem.fields['system.description'].trim();
-    //}
-    //if (this.workItem.fields['system.title']) {
-      //this.workItemService
-        //.create(this.workItem)
-        //.then(workItem => {
-          //this.workItem = workItem; // saved workItem, w/ id if new
-          //this.logger.log(`created and returned this workitem:` + JSON.stringify(workItem));
-          //this.workItem.fields['system.description'] = '';
-          //this.workItem.fields['system.title'] = '';
-          //this.validTitle = false;
-          //this.goBack(workItem);
-        //})
-        //.catch(error => this.error = error); // TODO: Display error message
-    //} else {
-      //this.error = 'Title can not be empty.';
-   // }
- // }
+  save(): void {
+    if (this.workItem.fields['system.title'] != null) {
+      this.workItem.fields['system.title'] = this.workItem.fields['system.title'].trim();
+   }
+    if (this.workItem.fields['system.description'] != null) {
+      this.workItem.fields['system.description'] = this.workItem.fields['system.description'].trim();
+    }
+    if (this.workItem.fields['system.title']) {
+      this.workItemService
+        .create(this.workItem)
+        .then(workItem => {
+          this.workItem = workItem; // saved workItem, w/ id if new
+          this.logger.log(`created and returned this workitem:` + JSON.stringify(workItem));
+          this.workItem.fields['system.description'] = '';
+          this.workItem.fields['system.title'] = '';
+          this.validTitle = false;
+          this.goBack(workItem);
+        })
+        .catch(error => this.error = error); // TODO: Display error message
+    } else {
+      this.error = 'Title can not be empty.';
+   }
+ }
 
   checkTitle(): void {
     if (this.workItem.fields['system.title'] && this.workItem.fields['system.title'].trim()) {
@@ -75,9 +77,10 @@ export class WorkItemQuickAddComponent implements OnInit {
     this.ngOnInit();
   }
 
-  showQuickAddWI(): void {
-    this.showQuickAdd = true;
-  } 
+  toggleQuickAdd(): void {
+    this.showQuickAdd = !this.showQuickAdd;
+    this.showQuickAddBtn = !this.showQuickAddBtn;
+  }
 
   addWorkItemBtn(): void {
     if (this.workItem.fields['system.title'] != null) {

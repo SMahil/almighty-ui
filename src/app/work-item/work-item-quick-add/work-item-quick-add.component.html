@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>-->
-  <div class="width100 fl addWorkItem" (click)="showQuickAddWI()" [ngClass]="{'db' : QuickAddWI, 'dn' : !QuickAddWI}">
+  <div class="width100 fl addWorkItem" (click)="toggleQuickAdd()" [ngClass]="{'db' : showQuickAddBtn, 'dn' : !showQuickAddBtn}">
     <a id="workItemQuickAdd_saveBtn" class="workItemQuickAdd_saveBtn">
       <i class='pficon-add-circle-o dib font18'></i>
     </a>
@@ -55,5 +55,6 @@
             (keyup)="checkTitle()" placeholder="A New Story" required/>
     </div>
     <span class="fr font16 workItemQuickAdd_Add" (click)="addWorkItemBtn()" [ngClass]="{'icon-btn': validTitle,'icon-btn-disabled':!validTitle}">Add</span>
+    <span (click)="toggleQuickAdd()">X</span>
   </div>
 </div>
