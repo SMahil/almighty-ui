@@ -6,6 +6,46 @@
 </div>
 <div class="list-group-item" (click)="onSelect($event)" [class.selected]="isSelected()">
 	<!-- info area -->
+	<div class="list-view-pf-left pull-left marginT20 marginB20 paddingB5 paddingT5">
+    	<div class="dropdown pull-left">
+			<a class=" dropdown-toggle " data-toggle="dropdown" id="dropdownMenu1"> <i class="pficon-resources-almost-full font12"></i>
+			</a>
+			<ul  class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="dropdownMenu1">
+				<li class="width100 pull-left" >
+					<div class="pull-left width100">
+						<i class="pficon-resources-almost-full font12 pull-left paddingL10 paddingR10 paddingT5 paddingB5"></i>
+						<span class="pull-left font12">resolved</span>
+					</div>
+				</li>
+				<li class="width100 pull-left" >
+					<div class="pull-left width100">
+						<i class="pficon-resources-almost-full font12 pull-left paddingL10 paddingR10 paddingT5 paddingB5"></i>
+						<span class="pull-left font12">resolved</span>
+					</div>
+				</li>
+				<li class="width100 pull-left" >
+					<div class="pull-left width100">
+						<i class="pficon-resources-almost-full font12 pull-left paddingL10 paddingR10 paddingT5 paddingB5"></i>
+						<span class="pull-left font12">resolved</span>
+					</div>
+				</li>
+				<li class="width100 pull-left" >
+					<div class="pull-left width100">
+						<i class="pficon-resources-almost-full font12 pull-left paddingL10 paddingR10 paddingT5 paddingB5"></i>
+						<span class="pull-left font12">resolved</span>
+					</div>
+				</li>
+			</ul>
+		</div>				
+    </div>
+	<!--<div class="list-view-pf-left mobdn paddingT20 paddingB20 pull-left">
+    	<pf-dropdown
+      	(change)="onChangeState($event)" 
+        [options]="stateDropdownOptions"
+		[disabled]="!loggedIn"
+        [selected]="workItem.selectedState">
+      </pf-dropdown>				
+    </div>-->
 	<div class="list-view-pf-main-info">
 		<div class="list-view-pf-left type workItemList_workItemType">
 			<span class='fa' [ngClass]="{'fa-wrench': workItem.type=='system.bug',
@@ -29,14 +69,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="list-view-pf-left mobdn paddingT20 paddingB20 pull-left">
-    	<pf-dropdown
-      	(change)="onChangeState($event)" 
-        [options]="stateDropdownOptions"
-		[disabled]="!loggedIn"
-        [selected]="workItem.selectedState">
-      </pf-dropdown>				
-    </div>
 	<!-- action area -->
 	<div class="list-view-pf-actions">
 		<button class="btn btn-default workItemList_ViewItemDetailBtn mobdn" (click)="onDetail($event)">View Details</button>
