@@ -1,19 +1,12 @@
-FROM centos:7
+FROM registry.centos.org/kbsingh/openshift-nginx:latest
 MAINTAINER "Konrad Kleine <kkleine@redhat.com>"
+
 ENV LANG=en_US.utf8
-ENV ALMIGHTY_INSTALL_PREFIX=/usr/local/alm
 
-# Create a non-root user and a group with the same name: "almighty"
-ENV ALMIGHTY_USER_NAME=almighty
-RUN useradd --no-create-home -s /bin/bash ${ALMIGHTY_USER_NAME}
+USER root
+ADD nginx.conf /etc/nginx/nginx.conf
+USER 997
 
-COPY dist ${ALMIGHTY_INSTALL_PREFIX}
+RUN rm /usr/share/nginx/html/*
 
-# From here onwards, any RUN, CMD, or ENTRYPOINT will be run under the following user
-USER ${ALMIGHTY_USER_NAME}
-
-WORKDIR ${ALMIGHTY_INSTALL_PREFIX}
-ENTRYPOINT [ "python", "-m", "SimpleHTTPServer", "8080" ]
-
-EXPOSE 8080
-
+COPY dist /usr/share/nginx/html

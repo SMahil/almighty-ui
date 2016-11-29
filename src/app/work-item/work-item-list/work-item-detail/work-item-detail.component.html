@@ -1,0 +1,215 @@
+<div class="detail-container" *ngIf="workItem" id="workItemDetail_Wrapper">
+  <form *ngIf="active"           
+        #almWorkItemDetailForm="ngForm" 
+        id="wi-detail-form">
+    <fieldset [attr.disabled]="!loggedIn ? true : null">
+      <div class="width100 pull-left mobile-bar paddingL20 paddingR20">
+        <div class="pull-left dropdown-kebab-pf detail-type-dropdown" dropdown>
+          <span dropdown-open class="wi-type-icon" almIcon [iconType]="workItem.type"></span>
+          <ul *ngIf="loggedIn" id="wi-type-dropdown" class="dropdown-menu mobMarginL20" aria-labelledby="dropdownKebabRight">
+            <li *ngFor="let type of workItemTypes" (click)="onChangeType(type.name)">
+              <a>
+                <span class="wi-type-icon dropdown-icon" almIcon [iconType]="type.name"></span>
+                <span class="dropdown-text">
+                  {{type.name.substring(7,type.length)}}
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <h5 class="detail-id pull-left" id="wi-detail-id">{{workItem.id}}</h5>
+        <span class="pficon-close detail-close" (click)="closeDetails()"></span>
+      </div>
+
+      <div class="width100 pull-left truncate-ellipsis">
+        <div class="col-md-8 col-sm-7 col-xs-12 marginB10 wi-detail-title-blk">
+          <div *ngIf="!headerEditable" (click)='openHeader()'
+            id="title-click-div">
+              <h2 *ngIf="!loggedIn" id="wi-detail-title-ne" class="detail-title truncate">{{ workItem.fields['system.title'] }}</h2>
+              <h2 *ngIf="loggedIn" id="wi-detail-title-click" class="detail-title truncate">{{ workItem.fields['system.title'] }}</h2>
+              <span *ngIf="loggedIn" 
+                class="pficon-edit marginL10 fl detail-title-edit-ico" 
+                id="workItemTitle_btn_edit"></span>
+          </div>
+          <div *ngIf="loggedIn && headerEditable" class="marginB10" id="wi-title-div"> 
+              <div almEditable 
+                  (onUpdate)="checkTitle($event)"
+                  (keyup.enter)="onUpdateTitle()"
+                  (keydown.enter)="preventDef($event)"
+                  id="wi-detail-title"
+                  class="detail-title-edit marginB10"         
+                  [innerText]="workItem.fields['system.title'] | almTrim"
+                  #title >
+              </div>
+              <aside class="width100 pull-left">
+                <!--Save icon-->                                       
+                <div id="workItemTitle_btn_save"
+                    class="pull-right btn-small detail-action-btn" 
+                    [ngClass]="{disabled : validTitle == false}"
+                    (click)="validTitle && onUpdateTitle()" >                                        
+                    <span class="fa fa-check"></span>
+                </div>            
+                <!--Cancel icon-->                        
+                <div id="workItemTitle_btn_cancel" 
+                    class="pull-right fl btn-small detail-action-btn" 
+                    (click)="closeHeader()">
+                  <span class="fa fa-close"></span>
+                </div>   
+              </aside>                             
+              <!--Error message for title-->
+              <p [hidden]="validTitle" 
+                  class="clearfloat alert alert-danger">                                    
+                  Title is required
+              </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-5 col-xs-5 wi-state-btn pull-right padding0">
+          <div dropdown class="dropdown card-pf-time-frame-filter detail-status-dropdown">
+            <button dropdown-open 
+              id="wi-detail-state"
+              type="button" 
+              class="btn dropdown-toggle width100 btn-default">
+              <span class='dropdown-icon' almIcon [iconType]="workItem.fields['system.state']"></span>
+              <span class='dropdown-text'>
+                {{workItem.fields['system.state']}}
+              </span>
+              <span *ngIf="loggedIn" class="caret pull-right marginT5"></span>
+            </button>
+            <ul *ngIf="loggedIn" id="wi-status-dropdown" class="dropdown-menu dropdown-menu-right dropdown-ul" role="menu">
+              <li class="dropdown-li" *ngFor="let state of workItemStates;" (click)="onChangeState(state.option)">
+                <a> 
+                  <span class='dropdown-icon' almIcon [iconType]="state.option"></span>
+                  <span class='dropdown-text'>{{state.option}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="width100 pull-left paddingL20 paddingR20 detail-assignee-wrap">
+          <span
+            *ngIf="!assignedUser"
+            (click)="activeSearchAssignee()" 
+            class="pull-left fa fa-user-plus user-assign-icon">
+          </span>
+          <img 
+            *ngIf="assignedUser"
+            (click)="activeSearchAssignee()"
+            class="pull-left user-assign-avatar"
+            src="{{assignedUser.imageURL + '&s=20'}}" 
+            onError="this.src='https://avatars0.githubusercontent.com/u/563119?v=3&s=20'" />
+          
+          
+          <div class="pull-left detail-assignee-name">
+              <span 
+                *ngIf="!searchAssignee && !assignedUser" 
+                (click)="activeSearchAssignee()" 
+                class="placeholder clickable"> Unassigned </span>
+              
+              <span 
+                *ngIf="!searchAssignee && assignedUser" 
+                (click)="activeSearchAssignee()" 
+                class="clickable" 
+                id="WI_details_assigned_user"> {{assignedUser.fullName}} </span>
+
+              <div *ngIf="searchAssignee" class="user-search" >
+                <div class="list-container">
+                  <span class="fa fa-search user-search-icon"> </span>                  
+                  <input #userSearch (keyup)="filterUser($event)" />
+                  <ul class="item-ul user-list" #userList>
+                    <li 
+                      class="item-li"
+                      [class.first-item] = "filteredUsers && filteredUsers.length"
+                      [class.only-first-item] = "!filteredUsers || !filteredUsers.length" 
+                      *ngIf="loggedInUser"
+                      [attr.data-value]="loggedInUser.id"
+                      (click)="assignUser(loggedInUser.id)">
+                        <!-- <span class="pull-left fa fa-user user-assign-icon active"></span> -->
+                        <img 
+                          class="pull-left user-assign-avatar" 
+                          src="{{loggedInUser.attributes.imageURL + '&s=20'}}" 
+                          onError="this.src='https://avatars0.githubusercontent.com/u/563119?v=3&s=20'"/>
+                        <span [innerHTML]="loggedInUser.attributes.fullName + ' (me)'"></span>
+                    </li>
+                    <li 
+                      class="item-li" 
+                      *ngFor="let user of filteredUsers;" 
+                      [attr.data-value]="user.id"
+                      (click)="assignUser(user.id)">
+                        <!-- <span class="pull-left fa fa-user user-assign-icon active"></span> -->
+                        <img 
+                          class="pull-left user-assign-avatar" 
+                          src="{{user.attributes.imageURL + '&s=20'}}" 
+                          onError="this.src='https://avatars0.githubusercontent.com/u/563119?v=3&s=20'"/>
+                        <span [innerHTML]="user.attributes.fullName | almSearchHighlight: userSearch.value"></span>
+                    </li>
+                  </ul>
+                  <ul class="item-ul">
+                    <li class="action-li">
+                        <span class="action-item" (click)="unassignUser()">Unassign</span>
+                        <span class="action-item" (click)="cancelAssignment()">Cancel</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+          </div>
+      </div>
+
+      <div class="width100 pull-left detail-description-wrap">
+        <div class="col-md-12 col-sm-12 col-xw-12 detail-description" *ngIf="loggedIn">
+          <div class="detail-desc-div-wrap" (click)="openDescription(false, true)">
+            <div class="detail-desc-div"
+              [class.desc-editable]="descEditable"
+              [class.desc-not-found]="!descEditable && !workItem.fields['system.description']">
+              <!-- 
+                Following condition for innerHTML might look
+                little confusing. So, here is the explaination - 
+                If there is some description is hould show up
+                If there is none, then it should check if the description 
+                field is editable or not. If it's editable then it should
+                stay empty as in the default value of description.
+                If it's not editable and there is no description as well,
+                it should show up the message 'Work item Descriptionm.'
+              -->                        
+              <p almEditable [editable]="descEditable"
+                #desc 
+                (onUpdate)="descUpdate($event)"
+                (keydown.enter)="onUpdateDescription()"
+                (keyup.enter)="preventDef($event)"
+                id="wi-detail-desc" 
+                class="description"
+                [innerText]="
+                  workItem.fields['system.description'] ? 
+                    workItem.fields['system.description'] : 
+                    descEditable ? 
+                      workItem.fields['system.description'] : 
+                      'Work item description.'">
+              </p>
+              <div class="edit-icon">
+                <span id="workItemDesc_btn_edit" class="pficon-edit" 
+                  (click)='openDescription()'></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="wi-detail-desc" class="col-md-12 description" *ngIf="!loggedIn">
+          {{workItem.fields['system.description']}}
+        </div>
+      </div>                    
+      <div *ngIf="loggedIn && descEditable" class="width100 pull-left detail-desc-action paddingL20 paddingR20">
+          <div id="workItemdesc_btn_save" 
+              class="fl btn-small pull-right detail-action-btn" 
+              (click)="onUpdateDescription()">
+              <span class="fa fa-check"></span>
+          </div>
+          <div id="workItemdesc_btn_cancel" 
+              class="fl btn-small pull-right detail-action-btn" 
+              (click)="closeDescription()">
+              <span class="fa fa-close"></span>
+          </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

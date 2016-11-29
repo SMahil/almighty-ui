@@ -1,0 +1,68 @@
+@import "../../../assets/stylesheets/color-variables";
+@import "../../../assets/stylesheets/custom";
+
+.error {color:$color-pf-red-100;}
+.supress-hover{
+  &:hover{
+    background-color: transparent;
+  }
+}
+.containerPadd{ padding: 8em 0 5.5em 0; }
+.containerPadd-nologin{ padding-bottom: 0; }
+
+
+@media (max-width: ($grid-float-breakpoint - 1)){
+  .containerPadd{ padding-top: 11em; }
+  .containerPadd-nologin{ padding-bottom: 0; }
+  .workItem_Overlay{
+    background-color:$color-pf-black;
+    left:0;
+    position: fixed;
+    top:0;
+    z-index:9;
+  }
+  .inactivOverlay{
+    height:0;
+    opacity: 0;
+    width:0;
+    @include transition(opacity .3s);
+  }
+  .activeOverlay {
+    height: 100%;
+    @include transition(opacity .3s);
+    opacity: .6;
+    width: 100%;
+  }  
+}
+
+.detail-panel {
+  background: $color-pf-white;  
+  position: fixed;
+  left: auto;
+  top: 34px;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  min-width: 250px;
+  z-index: 9999;
+  padding: $pad20 0;
+  border-left: 1px solid #cccccc;  
+  overflow-y: scroll;
+}
+@media (max-width: $grid-float-breakpoint){
+  /*Toggle the details panel's width and left margin*/
+  .detail-panel{
+    width: 100%;
+    padding: 0 ;
+    top:0;
+  }
+}
+
+.detail-list-container {
+  height: 100%;
+  overflow: hidden;
+  .detail-list-wrap {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}

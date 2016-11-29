@@ -1,0 +1,48 @@
+@import "../../assets/stylesheets/navbar";
+@import "../../assets/stylesheets/navs";
+@import "../../assets/stylesheets/icons";
+@import "../../assets/stylesheets/custom";
+@import "../../assets/stylesheets/color-variables";
+.header-navbar{
+    position: fixed;
+    @extend .width100;
+    float: left;
+}
+.navbar-pf {
+    .navbar-nav li a {
+        line-height: 1.3em;
+        text-shadow:none;
+        cursor: pointer;
+        .img-icon{
+            width: 25px;
+            height: 25px;
+            margin-top: -3px;
+        }
+    }
+    .navbar-collapse span.fa,span.pficon {
+        font-size:20px;
+    }
+}
+@media (max-width: $grid-float-breakpoint){
+.navbar-fixed-top {
+        position: fixed;
+        top: auto;
+    }
+    .navbar-collapse {
+        max-height: none;
+    }
+    body {
+        margin: 0;
+    }
+    .nav-mob-scroll{
+        overflow-x: scroll !important;
+        .nav-list-mob-scroll{
+            width: 150%;
+        }
+    }
+}
+
+.no-link {
+  color: $color-pf-white;
+  text-decoration: none;
+}

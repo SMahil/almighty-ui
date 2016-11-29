@@ -1,75 +1,114 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import { Logger } from '../../shared/logger.service';
+
 import { WorkItem } from '../work-item';
 import { WorkItemService } from '../work-item.service';
 
+
 @Component({
-  selector: 'work-item-quick-add',
-  templateUrl: '/work-item-quick-add.component.html',
-  styleUrls: ['/work-item-quick-add.component.css']
+  selector: 'alm-work-item-quick-add',
+  templateUrl: './work-item-quick-add.component.html',
+  styleUrls: ['./work-item-quick-add.component.scss']
 })
 export class WorkItemQuickAddComponent implements OnInit {
-  @Input() workItem: WorkItem;
   @Output() close = new EventEmitter();
-  error: any;
-  navigated = false; // true if navigated here
-  validName = false;
+  @ViewChild('quickAddTitle') qaTitle: any;
+  @ViewChild('quickAddDesc') qaDesc: any;
 
+  error: any = false;
+  workItem: WorkItem;
+  validTitle: Boolean;
+  showQuickAdd: Boolean;
+  showQuickAddBtn: Boolean;
+  initialDescHeight: number = 0;
+  initialDescHeightDiff: number = 0;
+  descHeight: any = '26px';
+  descResize: any = 'none';
+  
   constructor(
     private workItemService: WorkItemService,
-    private route: ActivatedRoute,
     private logger: Logger) {
   }
 
   ngOnInit(): void {
-    this.route.params.forEach((params: Params) => {
-      if (params['id'] !== undefined) {
-        let id = params['id'];
-        this.navigated = true;
-        this.workItemService.getWorkItem(id)
-          .then(workItem => this.workItem = workItem);
-      } else {
-        this.validName = false;
-        this.navigated = false;
-        this.workItem = new WorkItem();
-        this.workItem.fields = {"system.assignee": null, "system.state": 'new', "system.creator": "me", "system.title": null, "system.description": null};
-        this.workItem.type = 'system.userstory';
-      }
-    });
+    this.workItem = {
+      'fields': {
+        'system.assignee': null,
+        'system.state': 'new',
+        'system.creator': 'me',
+        'system.title': null,
+        'system.description': null
+      },
+      'type': 'system.userstory',
+      'version': 0
+    } as WorkItem;
+    this.showQuickAdd = false;
+    this.showQuickAddBtn = true;
   }
 
-  save(): void {
-    if(this.validName){
+  save(event: any = null): void {
+    if (event) event.preventDefault();
+    if (this.workItem.fields['system.title'] != null) {
+      this.workItem.fields['system.title'] = this.workItem.fields['system.title'].trim();
+    }
+    if (this.workItem.fields['system.description'] != null) {
+      this.workItem.fields['system.description'] = this.workItem.fields['system.description'].trim();
+    }
+    if (this.workItem.fields['system.title']) {
       this.workItemService
         .create(this.workItem)
         .then(workItem => {
           this.workItem = workItem; // saved workItem, w/ id if new
-          this.logger.log(`created and returned this workitem: ${workItem}`);
+          this.logger.log(`created and returned this workitem:` + JSON.stringify(workItem));
+          this.workItem.fields['system.description'] = '';
+          this.workItem.fields['system.title'] = '';
+          this.validTitle = false;
           this.goBack(workItem);
+          this.showQuickAddBtn = false;
+          this.showQuickAdd = true;
+          this.descHeight = this.initialDescHeight ? this.initialDescHeight : '26px';
+          this.qaTitle.nativeElement.focus();
         })
         .catch(error => this.error = error); // TODO: Display error message
+    } else {
+      this.error = 'Title can not be empty.';
     }
+  }
+
+  checkTitle(): void {
+    if (this.workItem.fields['system.title'] && this.workItem.fields['system.title'].trim()) {
+      this.validTitle = true;
+    } else {
+      this.validTitle = false;
+    }
+  }
+
+  checkDesc(): void {
+    if (!this.initialDescHeight) {
+      this.initialDescHeight = this.qaDesc.nativeElement.offsetHeight;
+      this.initialDescHeightDiff = this.initialDescHeight - this.qaDesc.nativeElement.scrollHeight; 
+    }
+    this.descHeight = this.qaDesc.nativeElement.scrollHeight + this.initialDescHeightDiff; 
   }
 
   goBack(savedWorkItem: WorkItem = null): void {
     this.close.emit(savedWorkItem);
-    if (this.navigated) { window.history.back(); }
     this.ngOnInit();
   }
 
-  checkTitle(){
-    if(this.workItem.fields['system.title']){
-      this.validName = true;
-    }else{
-      this.validName = false;
+  toggleQuickAdd(): void {
+    this.showQuickAdd = !this.showQuickAdd;
+    this.showQuickAddBtn = !this.showQuickAddBtn;
+    if (!this.showQuickAdd) {
+      this.workItem.fields['system.description'] = '';
+      this.workItem.fields['system.title'] = '';
+      this.validTitle = false;
+      this.descHeight = this.initialDescHeight ? this.initialDescHeight : 'inherit';
     }
   }
 
-  eventHandler(event:any){
-    if(event.keyCode===13){
-      this.save();
-    }
+  preventDef(event: any) {
+    event.preventDefault();
   }
 }

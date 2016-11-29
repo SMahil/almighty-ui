@@ -1,13 +1,10 @@
-<app-header></app-header>
-<div class="container-fluid container-cards-pf">
-  <h3>Top WorkItems</h3>
-  <div class="grid grid-pad">
-    <div *ngFor="let workItem of workItems" (click)="gotoDetail(workItem)" class="col-1-4">
-      <div class="module workItem">
-        <h4>{{workItem.fields['system.title']}}</h4>
+<div id="board_topWorkItems" class="container-fluid container-cards-pf">
+  <div class='board'>
+      <div class='lane' *ngFor='let lane of lanes'>
+          <div class="lane-header">{{lane.title}}</div>
+          <div [dragula]="'nested-bag'">
+            <div *ngFor='let card of lane.cards' class="card" (click)="gotoDetail(card)" id="{{'board_topWorkItemList_'+card.id}}">{{card.fields['system.title']}}</div>
+          </div>
       </div>
-    </div>
   </div>
-  <work-item-search></work-item-search>
 </div>
-<app-footer></app-footer>

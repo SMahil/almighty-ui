@@ -16,6 +16,7 @@
 .classpath
 *.launch
 .settings/
+.vscode
 
 # misc
 /.sass-cache
@@ -25,6 +26,8 @@
 npm-debug.log
 testem.log
 /typings
+functional_tests.log
+unit_tests.log
 
 # e2e
 /e2e/*.js
