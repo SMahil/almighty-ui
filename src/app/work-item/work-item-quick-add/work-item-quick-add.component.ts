@@ -126,8 +126,10 @@ export class WorkItemQuickAddComponent implements OnInit, AfterViewInit {
       this.workItem.fields['system.title'] = '';
       this.validTitle = false;
       this.descHeight = this.initialDescHeight ? this.initialDescHeight : 'inherit';
+    } else {
+      setTimeout(() => this.qaTitle.nativeElement.focus());
     }
-  }
+}
 
   preventDef(event: any) {
     event.preventDefault();
