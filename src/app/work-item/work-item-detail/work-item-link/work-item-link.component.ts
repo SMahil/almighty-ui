@@ -161,7 +161,6 @@ export class WorkItemLinkComponent implements OnInit, OnChanges, DoCheck {
     .getLinkTypes(this.workItem)
       .then((linkTypes: Object) => {
         this.formatLinkTypes(linkTypes);
-        // this.linkTypes = cloneDeep(linkTypes)
       })
       .catch ((e) => console.log(e));
   }
@@ -184,6 +183,7 @@ export class WorkItemLinkComponent implements OnInit, OnChanges, DoCheck {
           wiType: linkType.relationships.source_type.data.id
         });
     });
+    console.log('Types', this.linkTypes);
   }
 
   toggleLinkComponent(onlyOpen: Boolean = false): void{
@@ -192,6 +192,13 @@ export class WorkItemLinkComponent implements OnInit, OnChanges, DoCheck {
         this.showLinkComponent = true;
       } else {
         this.showLinkComponent = !this.showLinkComponent;
+      }
+    }
+    if (!this.showLinkComponent) {
+      this.selectedTab = null;
+    } else {
+      if (!this.selectedTab) {
+        this.selectedTab = 'all';
       }
     }
   }
@@ -289,7 +296,7 @@ export class WorkItemLinkComponent implements OnInit, OnChanges, DoCheck {
 
   selectSearchResult(id: string, title: string){
     this.selectedWorkItemId = id;
-    this.selectedValue = id+' - '+title;
+    this.selectedValue = id + ' - ' + title;
     this.searchWorkItems = [];
   }
 

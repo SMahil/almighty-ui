@@ -5,8 +5,8 @@
             'fa-angle-right': !showLinkComponent}"></i>
     </li>
     <li
-      [class.active]="selectedTab === null"
-      (click)="selectTab()">
+      [class.active]="selectedTab === 'all'"
+      (click)="selectTab('all')">
       <a>
         <span>
           Total Links
@@ -58,7 +58,7 @@
                       <a (click)="onSelectRelation(linkType)">{{linkType.name}}</a>
                     </li>
                   </ul>
-                  <span class="input-group-addon" dropdown-toggle> <span class="caret"></span> </span>
+                  <span class="input-group-addon" dropdownToggle> <span class="caret"></span> </span>
                 </div>
               </div>
               <span class="flex-grow-1 padding-left-15 padding-top-3"> to,item</span>
@@ -66,7 +66,7 @@
             <div class="flex-container padding-bottom-5 margin-top-15 margin-bottom-15">
               <div class="combobox-container flex-grow-1  margin-right-15 padding-right-15">
                 <input type="hidden" name="" value="">
-                <div class="input-group" dropdown>
+                <div class="input-group">
                   <input id="workitem-link-search" #searchBox
                     class="combobox form-control"
                     placeholder="Search for work items"
@@ -82,7 +82,7 @@
                         <span #searchresult><span class="weight-800">{{workItem.id}} - </span>{{workItem.attributes['system.title']}}</span>
                     </li>
                   </ul>
-                   <span class="input-group-addon" dropdown-toggle> <span class="caret"></span> </span>
+                   <span class="input-group-addon"> <span class="caret"></span> </span>
                 </div>
               </div>
               <button [disabled]="!selectedLinkType || !selectedWorkItemId ? true : false"
