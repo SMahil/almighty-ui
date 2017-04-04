@@ -572,9 +572,6 @@ class WorkItemDetailPage {
   iterationDropdown(){
     return element(by.id('WI_details_iteration_dropdownbtn'));
   }
-  iterationCaretdropdown (){
-    return element(by.id('iteration-caret'));
-  }
   clickAssignIteration(){
     return this.iterationDropdown().click();
   }
