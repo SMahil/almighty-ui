@@ -14,7 +14,7 @@
         <li class="active" *ngFor="let iteration of currentIterations" (click)='getWorkItemsByIteration(iteration)' [ngClass]="{'selected-iteration': (selectedIteration && selectedIteration.id === iteration.id)}">
           <div class="iteration-subheader flex-container">
             <div class="flex-grow-1 truncate">
-              <strong class="iteration-name "
+              <strong class="iteration-name"
                 tooltip="{{iteration.attributes.name}}"
                 placement="top">
                 {{iteration.attributes.name}}
@@ -153,8 +153,8 @@
       <ul class="not-current-iteration"
           [collapse]="isCollapsedPastIteration">
         <li class="iteration-subheader flex-container" *ngFor="let iteration of closedIterations" (click)='getWorkItemsByIteration(iteration)' [ngClass]="{'selected-iteration': (selectedIteration && selectedIteration.id === iteration.id)}">
-          <div class="truncate flex-grow-1">
-            <strong class="iteration-name "
+          <div class="truncate flex-grow-1" >
+            <strong class="iteration-name"
               tooltip="{{iteration.attributes.name}}"
               placement="top">
               {{iteration.attributes.name}}
