@@ -97,6 +97,7 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
   @ViewChild('containerHeight') containerHeight: ElementRef;
 
 
+  datatableWorkitems: any[] = [];
   checkableColumn: any[] = [];
   columns: any[] = [];
   workItems: WorkItem[] = [];
@@ -175,6 +176,33 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
     this.listenToEvents();
     this.loggedIn = this.auth.isLoggedIn();
     this.setTreeConfigs();
+
+    this.columns = [{
+      name: 'ID',
+      prop: 'id'
+    },{
+      name: 'Type',
+      prop: 'type',
+    },
+    {
+      name: 'Title',
+      prop: 'title'
+    },{
+      name: 'Status',
+      prop: 'status'
+    },{
+      name: 'Label',
+      prop: 'label'
+    },
+    {
+      name: 'Creator',
+      prop: 'creator'
+    },
+    {
+      name: 'Assignees',
+      prop: 'assignees'
+    }
+    ]
   }
 
   toggle(col) {
@@ -301,6 +329,8 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
       document.getElementsByTagName('body')[0].style.overflow = "hidden";
     }
     console.log(this.workItems);
+     this.datatableWorkitems =  this.tableWorkitem(this.workItems);
+     console.log("####-iiii", this.datatableWorkitems);
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -368,6 +398,7 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
           } else {
             console.log('[WorkItemListComponent] Space deselected');
             this.workItems = [];
+            this.datatableWorkitems = [];
           }
         });
   }
@@ -496,6 +527,7 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
           this.labels,
           this.included
         );
+        this.datatableWorkitems = this.tableWorkitem(this.workItems);
         this.workItemDataService.setItems(this.workItems);
         // Resolve assignees
         const t3 = performance.now();
@@ -544,6 +576,7 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
             newWiItemResp.included
           )
         ];
+        this.datatableWorkitems = this.tableWorkitem(this.workItems);
         this.workItemDataService.setItems(this.workItems);
         console.log('Performance :: Fetching more list items - ' + (t2 - t1) + ' milliseconds.');
 
@@ -609,6 +642,7 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
       this.labels
     );
     this.workItems = [...resolveItem, ...this.workItems];
+    this.datatableWorkitems = this.tableWorkitem(this.workItems);
   }
 
   onMoveToTop(entryComponent): void {
@@ -854,6 +888,20 @@ export class PlannerListComponent implements OnInit, AfterViewInit, DoCheck, OnD
         }
       })
     );
+  }
+
+  tableWorkitem(workItems: WorkItem[]): any { 
+    return workItems.map(element => {
+       return {
+        id: element.id,
+        type: element.relationships.baseType ? element.relationships.baseType : '',
+        title: element.attributes['system.title'],
+        labels: element.relationships.labels.data ? element.relationships.labels.data : '',
+        creator: element.relationships.creator.data,
+        assignees: element.relationships.assignees.data,
+        status: element.attributes['system.state']
+      }
+    });
   }
 
   //Patternfly-ng's tree list component
