@@ -110,6 +110,7 @@
                     <assignee-selector
                       id="assigneeSelector"
                       [allUsers]="users"
+                      [isDropDownOpen]="searchAssignee"
                       [loggedInUser]="loggedInUser"
                       [selectedAssignees]="workItem.relationships?.assignees?.data ?
                       workItem.relationships?.assignees?.data : []"

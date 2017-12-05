@@ -27,12 +27,13 @@ import { setTimeout } from 'core-js/library/web/timers';
   templateUrl: './assignee-selector.component.html',
   styleUrls: ['./assignee-selector.component.less']
 })
-export class AssigneeSelectorComponent {
+export class AssigneeSelectorComponent implements OnChanges {
 
   @ViewChild('userSearch') userSearch: any;
   @ViewChild('userList') userList: any;
   @ViewChild('dropdown') dropdownRef: SelectDropdownComponent;
 
+  @Input('isDropDownOpen') dropDownState: boolean;
   @Input() loggedInUser: User;
 
   allUsers: User[] = [];
@@ -93,6 +94,15 @@ export class AssigneeSelectorComponent {
     private auth: AuthenticationService,
     private workItemService: WorkItemService
   ) {}
+
+  ngOnChanges(change: SimpleChanges) {
+    if (change.dropDownState &&
+        change.dropDownState.previousValue &&
+        !change.dropDownState.currentValue &&
+        !change.dropDownState.firstChange) {
+      this.dropdownRef.closeDropdown();
+    }
+  }
 
   onSelect(event: any) {
     let findSelectedIndex = this.selectedAssignees.findIndex(i => i.id === event.id);

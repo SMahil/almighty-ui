@@ -709,7 +709,6 @@ export class WorkItemNewDetailComponent implements OnInit, OnDestroy {
       };
       console.log("STEP 3");
     }
-    //this.searchAssignee = false;
   }
 
   updateLabels(selectedLabels: LabelModel[]) {

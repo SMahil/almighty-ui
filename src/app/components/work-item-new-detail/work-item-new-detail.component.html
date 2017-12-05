@@ -90,6 +90,7 @@
                   <assignee-selector
                     [allUsers]="users"
                     [loggedInUser]="loggedInUser"
+                    [isDropDownOpen]="searchAssignee"
                     [selectedAssignees]="workItem.relationships?.assignees?.data ?
                     workItem.relationships?.assignees?.data : []"
                     (onOpenSelector)="onAssigneeSelectorOpen($event)"

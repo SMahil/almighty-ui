@@ -879,7 +879,6 @@ export class WorkItemDetailComponent implements OnInit, OnDestroy {
         data : assignees
       };
     }
-    //this.searchAssignee = false;
   }
 
   cancelAssignment(): void {
