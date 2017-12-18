@@ -212,7 +212,7 @@ export class PlannerListComponent implements OnInit, AfterViewChecked, OnDestroy
     if (document.getElementsByClassName('planner-hack-title-truncate').length) {
       let arr = document.getElementsByClassName('planner-hack-title-truncate');
       for(let i = 0; i < arr.length; i++) {
-        arr[i].parentElement.style.display = 'inline-flex';
+        arr[i].parentElement.style.display = 'flex';
       }
     }
 
@@ -732,7 +732,7 @@ export class PlannerListComponent implements OnInit, AfterViewChecked, OnDestroy
         // remove duplicate from datatable
         this.datatableWorkitems.splice(currentIndex, 1);
         this.workItems[this.workItems.length - 1].attributes['version'] = updatedWorkItem.attributes['version'];
-        
+
         // Update datatable WorkItems
         this.datatableWorkitems = [...this.datatableWorkitems, ...this.tableWorkitem([this.workItems[this.workItems.length - 1]])]
         this.listContainer.nativeElement.scrollTop = this.workItems.length * this.contentItemHeight;
