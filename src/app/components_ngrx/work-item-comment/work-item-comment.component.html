@@ -40,7 +40,6 @@
     <div>
       <div class="f8-comment__wrap"
         *ngFor='let comment of comments; let counter = index'>
-        <div>
           <div class="user-avatar margin-right-10 pull-left">
             <img class="user-assign-avatar"
               id="{{'comment_avatar_' + counter}}"
@@ -48,42 +47,22 @@
               container="body"
               tooltip="{{ (comment.creator | async)?.name }}"
               *ngIf="(comment.creator | async)?.avatar"
-              [src]="(comment.creator | async)?.avatar | almAvatarSize:30"
-            />
-          </div>
-          <div class="dropdown dropdown-kebab-pf pull-right dropdown" dropdown>
-            <button class="btn btn-link dropdown-toggle"
-              *ngIf="loggedIn && (loggedInUser?.id === (comment.creator | async)?.id)"
-              id="commentActionsKebab"
-              type="button"
-              dropdownToggle
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="true">
-              <span class="fa fa-ellipsis-v"></span>
-            </button>
-            <ul class="dropdown-menu-right dropdown-menu"
-              aria-labelledby="commentActionsKebab"
-              *dropdownMenu>
-              <li>
-                <a (click)="confirmCommentDelete(comment)">Delete</a>
-              </li>
-            </ul>
+              [src]="(comment.creator | async)?.avatar | almAvatarSize:30"/>
           </div>
           <div class="f8-comment-body">
             <div>
               <h5 class="f8-comment-author pull-left">
-                <strong  class="truncate"
+                <strong class="truncate"
                   id="{{'comment_username_' + counter}}">
                   {{(comment.creator | async)?.name}}
                 </strong>
               </h5>
-              <small class="f8-comment--create-time pull-right"
+              <small class="f8-comment--create-time"
                 id="{{'comment_time_' + counter}}">
                   {{comment.createdAt | date:'medium'}}
               </small>
             </div>
-            <div class="width-100 pull-left">
+            <div class="width-100 pull-left margin-top-10">
               <f8-markdown
                 [attr.id]="'comment_body_' + counter"
                 [editAllow]="(
@@ -100,7 +79,20 @@
                 (showPreview)="showPreview($event)">
               </f8-markdown>
             </div>
-
+            <div>
+                <a>
+                  <span class="fa fa-bin"></span>
+                  <span>Reply</span>
+                </a>
+                <a>
+                  <span class="fa fa-bin"></span>
+                  <span>Edit</span>
+                </a>
+                <a (click)="confirmCommentDelete(comment)">
+                  <span class="fa fa-bin"></span>
+                  <span>Delete</span>
+                </a>
+            </div>
             <!-- when comment is not editable -->
             <!-- <div
               class="width-100 pull-left"
@@ -143,7 +135,39 @@
               </aside>
             </div> -->
           </div>
+      </div>
+      <div class="f8-comment__wrap">
+        <div class="user-avatar margin-right-10 pull-left">
+          <img class="user-assign-avatar"
+            placement="right"
+            container="body"
+            tooltip="{{ (comment.creator | async)?.name }}"
+            src="https://www.gravatar.com/avatar/a7d2b43e1f1292dc1ed399171df0ca53.jpg&s=30" />
         </div>
+        <div class="f8-comment-body">
+          <div>
+            <h5 class="f8-comment-author pull-left">
+              <strong  class="truncate">
+                Sudipta
+              </strong>
+              <span class="dib" style="vertical-align: top">
+                changed the assignee from
+                <i> 'Michael' </i>
+                to 
+                <i> 'Unassignee' </i>
+              </span>
+            </h5>
+            <small class="f8-comment--create-time">
+              | 3 days ago
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="f8-comment__wrap">
+        check
+      </div>
+      <div class="f8-comment__wrap">
+        check
       </div>
     </div>
   </div>
