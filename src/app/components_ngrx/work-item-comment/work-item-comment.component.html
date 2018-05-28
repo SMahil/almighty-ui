@@ -80,18 +80,18 @@
               </f8-markdown>
             </div>
             <div>
-                <a>
-                  <span class="fa fa-bin"></span>
-                  <span>Reply</span>
-                </a>
-                <a>
-                  <span class="fa fa-bin"></span>
-                  <span>Edit</span>
-                </a>
-                <a (click)="confirmCommentDelete(comment)">
-                  <span class="fa fa-bin"></span>
-                  <span>Delete</span>
-                </a>
+              <a>
+                <span class="fa fa-bin"></span>
+                <span>Reply</span>
+              </a>
+              <a>
+                <span class="fa fa-bin"></span>
+                <span>Edit</span>
+              </a>
+              <a (click)="confirmCommentDelete(comment)">
+                <span class="fa fa-bin"></span>
+                <span>Delete</span>
+              </a>
             </div>
             <!-- when comment is not editable -->
             <!-- <div
@@ -164,10 +164,53 @@
         </div>
       </div>
       <div class="f8-comment__wrap">
-        check
+        <div class="user-avatar margin-right-10 pull-left">
+          <img class="user-assign-avatar"
+            placement="right"
+            container="body"
+            tooltip="{{ (comment.creator | async)?.name }}"
+            src="https://www.gravatar.com/avatar/a7d2b43e1f1292dc1ed399171df0ca53.jpg&s=30" />
+        </div>
+        <div class="f8-comment-body">
+          <div>
+            <h5 class="f8-comment-author pull-left">
+              <strong  class="truncate">
+                Sudipta
+              </strong>
+              <span class="dib" style="vertical-align: top">
+                added the labels
+              </span>
+            </h5>
+            <small class="f8-comment--create-time">
+              | 3 days ago
+            </small>
+          </div>
+        </div>
       </div>
       <div class="f8-comment__wrap">
-        check
+        <div class="user-avatar margin-right-10 pull-left">
+          <img class="user-assign-avatar"
+            placement="right"
+            container="body"
+            tooltip="{{ (comment.creator | async)?.name }}"
+            src="https://www.gravatar.com/avatar/a7d2b43e1f1292dc1ed399171df0ca53.jpg&s=30" />
+        </div>
+        <div class="f8-comment-body">
+          <div>
+            <h5 class="f8-comment-author pull-left">
+              <strong  class="truncate">
+                Sudipta
+              </strong>
+              <span class="dib" style="vertical-align: top">
+                added the assignee as
+                <i> 'Pranav' </i>
+              </span>
+            </h5>
+            <small class="f8-comment--create-time">
+              | 1 day(s) ago
+            </small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
