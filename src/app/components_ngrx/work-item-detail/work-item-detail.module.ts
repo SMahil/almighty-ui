@@ -54,6 +54,8 @@ import { SafePipeModule } from '../../pipes/safe.module';
 import { EventReducer } from '../../reducers/event.reducer';
 import { EventEffects } from '../../effects/event.effects';
 
+import { UserAvatarModule } from './../../widgets/user-avatar/user-avatar.module';
+
 @NgModule({
   imports: [
     AlmUserNameModule,
@@ -100,7 +102,8 @@ import { EventEffects } from '../../effects/event.effects';
       LinkTypeEffects,
       WorkItemLinkEffects
     ]),
-    SafePipeModule
+    SafePipeModule,
+    UserAvatarModule
   ],
   providers: [
     CommentQuery,

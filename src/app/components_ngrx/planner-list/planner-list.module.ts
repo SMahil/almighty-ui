@@ -56,6 +56,8 @@ import { ClickOutModule } from '../../widgets/clickout/clickout.module';
 // Data Querries
 import { CommentQuery } from './../../models/comment';
 import { UserQuery } from './../../models/user';
+import { UserAvatarModule } from './../../widgets/user-avatar/user-avatar.module';
+
 
 let providers = [
     WorkItemService,
@@ -142,7 +144,8 @@ let providers = [
       effects.WorkItemEffects,
       effects.InfotipEffects,
       effects.UserEffects
-    ])
+    ]),
+    UserAvatarModule
   ],
   declarations: [
     PlannerListComponent,
