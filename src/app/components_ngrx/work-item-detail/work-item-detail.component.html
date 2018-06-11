@@ -196,7 +196,7 @@
                 <user-avatar 
                   id="WI_details_reporter_img"
                   *ngIf="workItem?.creator"
-                  [imgSrc]="workItem?.creator?.avatar + '&s=20'"
+                  [imgSrc]="workItem?.creator?.avatar | almAvatarSize: 25"
                   [imgPlacement]="'bottom'"
                   [imgTooltip]="workItem?.creator?.name">
                 </user-avatar>

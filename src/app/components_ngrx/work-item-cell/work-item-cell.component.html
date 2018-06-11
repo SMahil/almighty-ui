@@ -62,7 +62,7 @@
 <!-- Creator -->
 <user-avatar
   *ngIf="col === 'creator'"
-  [imgSrc]= "row.creator?.avatar + '&s=23'" 
+  [imgSrc]= "row.creator?.avatar | almAvatarSize: 25" 
   [imgTooltip]= "row.creator?.name"
   [imgPlacement]="'left'">
 </user-avatar>
