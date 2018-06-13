@@ -13,6 +13,7 @@ import { WorkItem } from '../../models/work-item';
 import { CollaboratorService } from '../../services/collaborator.service';
 import { ModalService } from '../../services/modal.service';
 import { WorkItemService } from './../../services/work-item.service';
+import { EventQuery } from "../../models/event.model";
 
 @Component({
   selector: 'alm-work-item-comment',
@@ -31,11 +32,13 @@ export class WorkItemCommentComponent implements OnInit {
   isCollapsedComments: Boolean = false;
   commentEditable: Boolean = false;
   selectedCommentId: String = '';
+  private events = this.eventsQuery.getEventsWithModifier();
 
   constructor(
     private workItemService: WorkItemService,
     private modalService: ModalService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private eventsQuery: EventQuery
   ) {}
 
   ngOnInit() {}

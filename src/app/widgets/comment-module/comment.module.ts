@@ -6,6 +6,7 @@ import { MarkdownModule, WidgetsModule } from 'ngx-widgets';
 
 import { CommentComponent } from './comment.component';
 import { SafePipeModule } from '../../pipes/safe.module';
+import { WorkItemEventModule } from '../../components_ngrx/work-item-event/work-item-event.module';
 
 @NgModule({
   declarations: [ CommentComponent],
@@ -14,7 +15,8 @@ import { SafePipeModule } from '../../pipes/safe.module';
     SafePipeModule,
     MarkdownModule,
     TooltipModule,
-    WidgetsModule
+    WidgetsModule,
+    WorkItemEventModule
   ],
   exports: [CommentComponent]
 })

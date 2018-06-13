@@ -37,16 +37,18 @@
         (showPreview)="showPreview($event)">
       </f8-markdown>
     </div>
-    <div>
-      <div class="f8-comment__wrap"
-        *ngFor='let comment of comments; let counter = index'>
-        <fabric8-comment
-          [comment]="comment"
-          (onShowPreview)="showPreview($event)"
-          (onCreateRequest)="createChildComment($event)"
-          (onUpdateRequest)="updateComment($event)"
-        ></fabric8-comment>
-      </div>
+    <div class="f8-comment__wrap"
+      *ngFor='let comment of comments; let counter = index'>
+      <work-item-event
+        *ngFor="let event of events | async" 
+        [event]="event">
+      </work-item-event>
+      <fabric8-comment
+        [comment]="comment"
+        (onShowPreview)="showPreview($event)"
+        (onCreateRequest)="createChildComment($event)"
+        (onUpdateRequest)="updateComment($event)">
+      </fabric8-comment>
     </div>
   </div>
 </div>
