@@ -15,20 +15,20 @@
           *ngIf="textType === 'description'">
             edited the description
         </span>
-        <span 
-          class="dib" 
+        <span
+          class="dib"
           style="vertical-align: top"
           *ngIf="textType === 'attribute'" >
           <span [innerHTML]=intermediateText></span>
           <i> '{{event.oldValue}}' </i>
-          {{ toText }} 
+          {{ toText }}
           <i> '{{event.newValue}}'</i>
         </span>
         <span class="dib" style="vertical-align: text-top"
           *ngIf="textType === 'relationship'" >
           <span [innerHTML]=intermediateText></span>
           <i *ngFor="let item of event.newValueRelationships"> '{{item.name}}' </i>
-          <ng-container *ngIf="toText">{{ toText }} 
+          <ng-container *ngIf="toText">{{ toText }}
             <i *ngFor="let item of event.oldValueRelationships"> '{{item.name}}'</i>
           </ng-container>
         </span>
@@ -42,9 +42,9 @@
             [context]="'detail'">
           </f8-label>
           <ng-container *ngIf="toText">
-            <span class="dib" 
+            <span class="dib"
               style="vertical-align: text-top;">
-              {{ toText }} 
+              {{ toText }}
             </span>
             <f8-label
               [labels]='event.oldValueRelationships'
@@ -54,7 +54,7 @@
           </ng-container>
         </div>
       </h5>
-      <small class="f8-event--create-time" 
+      <small class="f8-event--create-time"
         style="vertical-align: text-top"
         [tooltip]="event.timestamp | date:'medium'">
         | {{event.timestamp | f8Time}}
