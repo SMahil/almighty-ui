@@ -394,8 +394,8 @@ export class ToolbarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
           return {
             queries: users.filter(u => !u.currentUser).map((user: UserUI) => {return {id: user.id, value: user.username, imageUrl: user.avatar}; }),
             primaryQueries: authUser ?
-              [{id: authUser.id, value: authUser.username + ' (me1)', imageUrl: authUser.avatar}, {id: null, value: 'Unassigned'}] :
-              [{id: null, value: 'Unassigned'}]
+              [{id: null, value: 'Unassigned Work Items'}, {id: authUser.id, value: authUser.name + ' (' + authUser.username + ' )' , imageUrl: authUser.avatar}] :
+              [{id: null, value: 'Unassigned Work Items'}]
           };
         },
         type: 'typeahead'
