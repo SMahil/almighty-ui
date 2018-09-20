@@ -9,31 +9,31 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   loadingAnimation = new ui.BaseElementArray($$('.spinner'), 'Loading spinner animation');
   notificationToast = new ui.BaseElementArray($$('pfng-toast-notification'), 'Notification Toast');
   /* UI elements of the Top section of the workitem preview */
-  closeButton = new ui.Button(this.$('.f8-detail--close'), 'WorkItem Quick Preview close button');
-  iterationDropdownCloseButton = new ui.Button(this.$('.iteration-dropdown .close-pointer'), 'Iteration dropdown close button');
+  closeButton = new ui.Button(this.$('.f8-planner-detail .close'), 'WorkItem Quick Preview close button');
+  iterationDropdownCloseButton = new ui.Button(this.$('.f8-iteration-dropdown .close-pointer'), 'Iteration dropdown close button');
   areaDropdownCloseButton = new ui.Button(this.$('.area-dropdown .close-pointer'), 'Area dropdown close button');
   typeDropdownCloseButton = new ui.Button(this.$('.type-dropdown .close-pointer'), 'Type dropdown close button');
   stateDropdownCloseButton = new ui.Button(this.$('.state-dropdown .close-pointer'), 'State dropdown close button');
   stateDiv = new ui.BaseElement(this.$('.state-dropdown'), 'State dropdown toggle');
   stateDropdown = new ui.Dropdown(
     this.stateDiv.$('f8-select-dropdown .dropdown-toggle'),
-    this.stateDiv.$('.select-dropdown-menu'),
+    this.stateDiv.$('.f8-select-dropdown__menu-dynamic-item'),
     'State select dropdown',
     'li>div>.item-value'
   );
   typeDiv = new ui.BaseElement(this.$('.type-dropdown'), 'Type dropdown toggle');
   typeDropdown = new ui.Dropdown(
     this.typeDiv.$('f8-select-dropdown .dropdown-toggle'),
-    this.typeDiv.$('.select-dropdown-menu'),
+    this.typeDiv.$('.f8-select-dropdown__menu-dynamic-item'),
     'Type select dropdown',
     'li>div>.item-value'
   );
   fullDetailButton = new ui.Clickable(this.$('span.dib'), 'View full details button');
   titleDiv = new ui.BaseElement(this.$('#wi-title-div'), 'Workitem title div');
   titleInput = new ui.TextInput(this.titleDiv.$('textarea'), 'WorkItem Title Input');
-  titleSaveButton = new ui.Button(this.titleDiv.$('.inlineinput-btn-save'), 'WorkItem Title Save button');
-  titleCancelButton = new ui.Button(this.titleDiv.$('.inlineinput-btn-cancel'), 'Workitem Title cancel button');
-  titleErrorMessage = new ui.BaseElement(this.$('.error-message small'), 'WorkItem Title error message');
+  titleSaveButton = new ui.Button(this.titleDiv.$('.f8-planner-inlineinput__btn-save'), 'WorkItem Title Save button');
+  titleCancelButton = new ui.Button(this.titleDiv.$('.f8-planner-inlineinput__btn-cancel'), 'Workitem Title cancel button');
+  titleErrorMessage = new ui.BaseElement(this.$('.has-error small'), 'WorkItem Title error message');
   linkCount = new ui.Clickable(this.$('#wi-link-total'), 'work item link total');
 
   /* UI elements for the middle section of the workitem preview */
@@ -41,7 +41,7 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   assigneeDropdownSelector = new ui.BaseElement(this.$('assignee-selector'), ' assignee selector');
   assigneeDropdown = new ui.Dropdown(
     this.$('#f8-add-assignee'),
-    this.$('assignee-selector ul.select-dropdown-menu'),
+    this.$('assignee-selector ul.f8-select-dropdown__menu'),
     'Assignee Select dropdown');
   assigneeDropdownCloseButton = new ui.Button(
     this.$('#f8-add-assignee-dropdown .close-pointer'),
@@ -53,32 +53,32 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   areaDiv = new ui.BaseElement(this.$('.area-dropdown'), 'Area List Div');
   areaDropdown = new ui.Dropdown(
     this.areaDiv.$('f8-select-dropdown .dropdown-toggle'),
-    this.areaDiv.$('.select-dropdown-menu'),
+    this.areaDiv.$('.f8-select-dropdown__menu'),
     'Area select dropdown',
     'li>div>.item-value'
   );
 
-  iterationDiv = new ui.BaseElement(this.$('.iteration-dropdown'), 'Iteration List Div');
+  iterationDiv = new ui.BaseElement(this.$('.f8-iteration-dropdown'), 'Iteration List Div');
   iterationDropdown = new ui.Dropdown(
     this.iterationDiv.$('f8-select-dropdown .dropdown-toggle'),
-    this.iterationDiv.$('.select-dropdown-menu'),
+    this.iterationDiv.$('.f8-select-dropdown__menu'),
     'Iteration select dropdown',
     'li>div>.item-value'
   );
-  iterationInput = new ui.TextInput(this.iterationDiv.$('.select-dropdown-search-input'), 'Iteration input');
+  iterationInput = new ui.TextInput(this.iterationDiv.$('.f8-select-dropdown__search-input'), 'Iteration input');
 
   labelDropdown = new ui.Dropdown(
-    this.$('#labelSelector .add-label'),
-    this.$('#labelSelector ul.select-dropdown-menu'),
+    this.$('#labelSelector .f8-planner-dropdown__selector-dropdown'),
+    this.$('#labelSelector ul.f8-select-dropdown__menu'),
     'Label Select dropdown');
-  labelsDiv = new ui.BaseElement(this.$('.f8-detail__labels'), ' labels Div');
-  labels = new ui.BaseElement(this.labelsDiv.$('.label-wrapper'), ' labels ');
-  labelListDiv = new ui.BaseElementArray(this.labelsDiv.$$('f8-label .label-wrapper>span'), 'label list Div');
-  labelDropDownDiv = new ui.BaseElement(this.$('#labelSelector .select-dropdown'), 'dropdown div');
+  labelsDiv = new ui.BaseElement(this.$('.f8-planner-detail__labels'), ' labels Div');
+  labels = new ui.BaseElement(this.labelsDiv.$('.f8-planner-label__wrapper'), ' labels ');
+  labelListDiv = new ui.BaseElementArray(this.labelsDiv.$$('f8-label .f8-planner-label__wrapper'), 'label list Div');
+  labelDropDownDiv = new ui.BaseElement(this.$('#labelSelector .f8-select-dropdown'), 'dropdown div');
   labelDropdownCloseButton = new ui.Clickable(this.labelDropDownDiv.$('.close-pointer'), 'label dropdown close Button');
-  createLabelButton = new ui.Clickable(this.labelDropDownDiv.$('.create-label-button'), 'Create new label');
-  createLabelDiv = new ui.BaseElement(this.$('.create-label'), 'create label div');
-  createLabelInput = new ui.TextInput(this.createLabelDiv.$('.create-label-input'), 'create label input');
+  createLabelButton = new ui.Clickable(this.labelDropDownDiv.$('.f8-planner-label__create-label-text'), 'Create new label');
+  createLabelDiv = new ui.BaseElement(this.$('.f8-planner-label__create-label'), 'create label div');
+  createLabelInput = new ui.TextInput(this.createLabelDiv.$('.f8-planner-label__create-label-input'), 'create label input');
   createLabelCancel = new ui.Button(this.createLabelDiv.$('.pficon-close'), 'create label cancel');
   createLabelSaveButton = new ui.Button(this.createLabelDiv.$('.fa-check'), 'create label save button');
 
@@ -95,11 +95,11 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   creatorAvatar = new ui.BaseElement(this.$('#WI_details_reporter_img>img'), 'Creator Avatar URL');
   /* UI elements for the bottom section of the workitem preview */
   linksDiv = new ui.BaseElement($('#wi-link'), 'WorkItem links div');
-  linksToggleButton = new ui.Clickable(this.linksDiv.$('.f8-toggle-caret'), 'WorkItem Links toggle button');
+  linksToggleButton = new ui.Clickable(this.linksDiv.$('.f8-planner-link--toggle'), 'WorkItem Links toggle button');
   linkTypeDiv = new ui.BaseElement(this.$('#wi-link-type'), 'Link type List Div');
   linkTypeDropdown = new ui.Dropdown(
     this.linkTypeDiv.$('f8-select-dropdown .dropdown-toggle'),
-    this.linkTypeDiv.$('.select-dropdown-menu'),
+    this.linkTypeDiv.$('.f8-select-dropdown__menu'),
     'Link type select dropdown',
     'li>div>.item-value'
   );
@@ -107,21 +107,21 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   linkSearchDiv = new ui.BaseElement(this.$('#workitem-link-search'), 'Link search List Div');
   linkSearchDropdown = new ui.Dropdown(
     this.linkSearchDiv.$('f8-select-dropdown .dropdown-toggle'),
-    this.linkSearchDiv.$('.select-dropdown-menu'),
+    this.linkSearchDiv.$('.f8-select-dropdown__menu'),
     'Link item search dropdown',
     'li>div>.item-value'
   );
-  searchWorkItem = new ui.TextInput(this.linkSearchDiv.$('input.select-dropdown-search-input'), 'Workitem search');
+  searchWorkItem = new ui.TextInput(this.linkSearchDiv.$('.f8-select-dropdown__search-input'), 'Workitem search');
 
-  workItemList = new ui.BaseElementArray(this.linkSearchDiv.$$('.select-dropdown-menu li'), 'work item list');
+  workItemList = new ui.BaseElementArray(this.linkSearchDiv.$$('.f8-select-dropdown__menu li'), 'work item list');
 
   linkButton = new ui.Button(this.linksDiv.$('#bind-link'), 'link Button');
-  linklistItem = new ui.BaseElement(this.$('#wi-link .f8-link__list-item'), 'link lst item');
+  linklistItem = new ui.BaseElement(this.$('#wi-link .f8-planner-link__list-item'), 'link lst item');
 
   commentsToggleButton = new ui.Clickable($('#wi-comment .f8-toggle-caret'), 'WorkItem Comments toggle button');
   creationTimeDiv = new ui.BaseElement(this.$('#created_at'), 'WorkItem creation time div');
 
-  commentDiv = new ui.BaseElement(this.$('.f8-comment--input'), 'comments div field');
+  commentDiv = new ui.BaseElement(this.$('.f8-planner-comment__input'), 'comments div field');
   commentsField = new ui.Clickable(this.commentDiv.$('.editor-box.editor-preview.placeholder'), 'comments clickable field');
   commentsInputField = new ui.TextInput(this.commentDiv.$('.editor-box.editor-markdown'), 'comment input field');
   commentSaveButton = new ui.Button(this.commentDiv.$('.btn-save'), 'Comment save button');
@@ -136,7 +136,7 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   storyPoints = new ui.TextInput(this.$('textarea[placeholder="Storypoints"]'), ' Storypoints textarea');
   dynamicFieldDiv = new ui.BaseElement(this.element(by.xpath("//textarea[@placeholder='Storypoints']/ancestor::f8-inlineinput")));
   dynamicFieldSaveButton =  new ui.Button(
-    this.dynamicFieldDiv.$('.inlineinput-btn-save'),
+    this.dynamicFieldDiv.$('.f8-planner-inlineinput__btn-save'),
     'Dynamic Fields Save Button');
 
   constructor(ele: ElementFinder, name: string = '') {
@@ -239,7 +239,7 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   }
 
   async removeLink(workItem: string) {
-    await new ui.BaseElement(this.element(by.xpath("//li[contains(@class,'f8-link__list-item')][.//span[contains(text(), '" + workItem + "')]]")).$('.pficon-close')).clickWhenReady();
+    await new ui.BaseElement(this.element(by.xpath("//li[contains(@class,'f8-planner-link__list-item')][.//span[contains(text(), '" + workItem + "')]]")).$('.pficon-close')).clickWhenReady();
   }
 
   async createNewLabel(label: string, isPressEnter: boolean = false) {

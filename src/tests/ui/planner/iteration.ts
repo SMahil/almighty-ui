@@ -7,7 +7,7 @@ export class Iteration extends ui.BaseElement {
   iterationDialog = new ui.BaseElement(this.$('.modal-content'), 'iteration Dialog');
   iterationName = new ui.TextInput(this.iterationDialog.$('#iteration-name'), 'Iteration text input');
   parentIteration = new ui.TextInput(this.iterationDialog.$('#parent-iteration'), 'parent iteration');
-  parentDropdownList = new ui.DropdownMenu(this.iterationDialog.$('.f8-iteration-modal-list'));
+  parentDropdownList = new ui.DropdownMenu(this.iterationDialog.$('.f8-planner-itr__modal-list'));
   parentDropdown = new ui.Dropdown(
    this.parentIteration,
    this.parentDropdownList,
