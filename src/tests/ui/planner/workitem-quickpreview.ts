@@ -37,7 +37,7 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   linkCount = new ui.Clickable(this.$('#wi-link-total'), 'work item link total');
 
   /* UI elements for the middle section of the workitem preview */
-  assigneeSection = new ui.BaseElement(this.$('.f8-detail__assignee'), ' assignee section');
+  assigneeSection = new ui.BaseElement(this.$('.f8-planner-detail__assignee'), ' assignee section');
   assigneeDropdownSelector = new ui.BaseElement(this.$('assignee-selector'), ' assignee selector');
   assigneeDropdown = new ui.Dropdown(
     this.$('#f8-add-assignee'),
@@ -47,10 +47,10 @@ export class WorkItemQuickPreview extends ui.BaseElement {
     this.$('#f8-add-assignee-dropdown .close-pointer'),
     'Assignee dropdown close button');
   assigneeDropdownMenu = new ui.BaseElement(
-    this.$('assignee-selector div.select-dropdown'),
+    this.$('assignee-selector div.f8-select-dropdown__wrapper'),
     'Assignee dropdown menu');
   assigneeDiv = new ui.BaseElement(this.$('f8-assignee'), 'Assignee List Div');
-  areaDiv = new ui.BaseElement(this.$('.area-dropdown'), 'Area List Div');
+  areaDiv = new ui.BaseElement(this.$('.f8-area-dropdown'), 'Area List Div');
   areaDropdown = new ui.Dropdown(
     this.areaDiv.$('f8-select-dropdown .dropdown-toggle'),
     this.areaDiv.$('.f8-select-dropdown__menu'),
@@ -86,10 +86,10 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   descriptionEditIcon = new ui.Clickable(this.descriptionDiv.$('i'), 'WorkItem Description Edit icon');
   descriptionTextarea = new ui.TextInput(this.descriptionDiv.$('.editor-box'), 'WorkItem Description Input');
   descriptionSaveButton =  new ui.Button(
-    this.descriptionDiv.$('.action-btn.btn-save'),
+    this.descriptionDiv.$('.action-button.btn-save'),
     'WorkItem Description Save Button');
   descriptionCancelButton =  new ui.Button(
-    this.descriptionDiv.$$('.action-btn.btn').first(),
+    this.descriptionDiv.$$('.action-button').first(),
     'WorkItem Description Save Button');
   creatorusername = new ui.BaseElement(this.$('#WI_details_reporter_user'), 'WorkItem creator div');
   creatorAvatar = new ui.BaseElement(this.$('#WI_details_reporter_img>img'), 'Creator Avatar URL');
@@ -118,23 +118,23 @@ export class WorkItemQuickPreview extends ui.BaseElement {
   linkButton = new ui.Button(this.linksDiv.$('#bind-link'), 'link Button');
   linklistItem = new ui.BaseElement(this.$('#wi-link .f8-planner-link__list-item'), 'link lst item');
 
-  commentsToggleButton = new ui.Clickable($('#wi-comment .f8-toggle-caret'), 'WorkItem Comments toggle button');
+  commentsToggleButton = new ui.Clickable($('#wi-comment .f8-planner-comment--toggle'), 'WorkItem Comments toggle button');
   creationTimeDiv = new ui.BaseElement(this.$('#created_at'), 'WorkItem creation time div');
 
   commentDiv = new ui.BaseElement(this.$('.f8-planner-comment__input'), 'comments div field');
   commentsField = new ui.Clickable(this.commentDiv.$('.editor-box.editor-preview.placeholder'), 'comments clickable field');
   commentsInputField = new ui.TextInput(this.commentDiv.$('.editor-box.editor-markdown'), 'comment input field');
   commentSaveButton = new ui.Button(this.commentDiv.$('.btn-save'), 'Comment save button');
-  commentCancelButton = new ui.Button(this.commentDiv.$('.fl.btn.btn-default.pull-right.action-btn'), 'Comment cancel button');
-  commentsText = new ui.BaseElementArray(this.$$('.f8-comment-body .comment .editor-box.editor-preview'), 'Comment List');
+  commentCancelButton = new ui.Button(this.commentDiv.$('.fl.btn.btn-default.pull-right.f8-planner__action-button'), 'Comment cancel button');
+  commentsText = new ui.BaseElementArray(this.$$('.f8-planner-comment__body .comment .editor-box.editor-preview'), 'Comment List');
   commentsCount = new ui.BaseElement(this.$('#total_comments'), 'comment count');
 
   /* UI elements for the Agile template of the workitem preview */
   effortTextArea = new ui.TextInput(this.$('[placeholder="Effort"]'), 'effort textarea');
-  workItemsGroup = new ui.Clickable(this.element(by.cssContainingText('alm-dynamic-field .f8-dynamic-control', ' Work Items ')), 'Side panel WorkItem button');
+  workItemsGroup = new ui.Clickable(this.element(by.cssContainingText('alm-dynamic-field .f8-planner-dynamic-control', ' Work Items ')), 'Side panel WorkItem button');
   businessValue = new ui.TextInput(this.$('textarea[placeholder="Business Value"]'), ' Business value textarea');
   storyPoints = new ui.TextInput(this.$('textarea[placeholder="Storypoints"]'), ' Storypoints textarea');
-  dynamicFieldDiv = new ui.BaseElement(this.element(by.xpath("//textarea[@placeholder='Storypoints']/ancestor::f8-inlineinput")));
+  dynamicFieldDiv = new ui.BaseElement(this.element(by.xpath("//textarea[@placeholder='Storypoints']/ancestor::f8-planner-inlineinput")));
   dynamicFieldSaveButton =  new ui.Button(
     this.dynamicFieldDiv.$('.f8-planner-inlineinput__btn-save'),
     'Dynamic Fields Save Button');

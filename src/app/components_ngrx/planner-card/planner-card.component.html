@@ -1,19 +1,25 @@
-<div class="f8-custom-card" (click)="cardClick(workItem, $event);" [attr.data-id]="workItem.id">
-  <pfng-card [config]="config" [headerTemplate]="cardHeader">
+<div class="f8-planner-card"
+  (click)="cardClick(workItem, $event);"
+  [attr.data-id]="workItem.id">
+  <pfng-card [config]="config"
+    [headerTemplate]="cardHeader">
     <ng-template #cardHeader>
-      <div class="f8-custom-card-header">
-        <div class="wi-type-icon-wrapper">
+      <div class="f8-planner-card__header">
+        <div class="f8-planner-card__header-type-icon">
           <span class="{{workItem.type?.icon}}"></span>
         </div>
-        <div class="title-wrapper" (click)="titleClick(workItem, $event);">
+        <div class="f8-planner-card__title"
+          (click)="titleClick(workItem, $event);">
           <span>{{ workItem.number }}: </span>
-          <strong class="pointer" [innerHTML]="workItem.title"></strong>
-          <span class="creator"> - created by {{ (workItem.creatorObs | async).name }}</span>
+          <strong class="pointer"
+            [innerHTML]="workItem.title">
+          </strong>
+          <span class="f8-planner-card__title-creator"> - created by {{ (workItem.creatorObs | async).name }}</span>
         </div>
       </div>
     </ng-template>
-    <div class="f8-custom-card-body">
-      <div class="sprint-name truncate"
+    <div class="f8-planner-card__body">
+      <div class="f8-planner-card__sprint truncate"
         *ngIf="workItem.iterationObs | async as iteration"
         [placement]="top"
         [tooltip]="iteration.resolvedParentPath === '/' ?
@@ -21,7 +27,7 @@
           iteration.resolvedParentPath + '/' + iteration.name">
         <span>{{ iteration.name }}</span>
       </div>
-      <div class="assignee">
+      <div class="text-right">
         <f8-assignee
           [showFullName]="false"
           [truncateAfter]="3"
@@ -30,7 +36,7 @@
         </f8-assignee>
       </div>
     </div>
-    <div class="f8-custom-card-footer">
+    <div class="f8-planner-card__footer">
       <f8-label
         [labels]="workItem.labelsObs | async"
         [truncateAfter]='4'

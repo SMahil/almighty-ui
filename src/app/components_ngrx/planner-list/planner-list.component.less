@@ -4,123 +4,126 @@
 @import '~rh-ngx-datatable/release/themes/material.css';
 
 
-.f8-wi-container {
-  .lock-overlay-list {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    height: 100%;
-    background-color: fade(@color-pf-white, 70%);
-    pointer-events: auto;
-    cursor: default;
-    .spinner-container {
+.f8-planner-container {
+  .f8-planner {
+    &-overlay {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      text-align: center;
-      color: @color-pf-black;
-      transform: translate(-50%, -50%);
-      h2 {
-        margin-top: .5em;
-      }
-      .spinner {
-        &:before {
-          content: unset;
-        }
-        position: relative;
-        top: unset;
-        left: unset;
-      }
-    }
-  }
-  .f8-wi-list {
-    float: left;
-    width: 100%;
-    height: 100%;
-    background-color: @color-pf-white;
-    &-wrap {
-      position: relative;
+      top: 0;
+      left: 0;
+      z-index: 1000;
       width: 100%;
-      // height: ~"calc(e('100% - 120px'))";
-      // to avoid overflown scroll height should be there
-      overflow-y: auto;
-      //List entry tree view specific css
-      .tree-node-level-2 .list-pf-item {
-        padding-left: 20px;
-      }
-      .tree-node-level-3 .list-pf-item {
-        padding-left: 40px;
+      height: 100%;
+      background-color: fade(@color-pf-white, 70%);
+      pointer-events: auto;
+      cursor: default;
+      .spinner-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        color: @color-pf-black;
+        transform: translate(-50%, -50%);
+        h2 {
+          margin-top: .5em;
+        }
+        .spinner {
+          &:before {
+            content: unset;
+          }
+          position: relative;
+          top: unset;
+          left: unset;
+        }
       }
     }
-    &__settings {
-      position: relative;
-      right: 5px;
-      float: right;
-      &-dropdown {
+    &-list {
+      float: left;
+      width: 100%;
+      height: 100%;
+      background-color: @color-pf-white;
+      &-wrap {
+        position: relative;
         width: 100%;
-        min-width: 400px;
-        height: 200px;
-        background-color: @color-pf-black-150;
-        &::after {
-          border-bottom-color: @color-pf-black-150;
+        // height: ~"calc(e('100% - 120px'))";
+        // to avoid overflown scroll height should be there
+        overflow-y: auto;
+        //List entry tree view specific css
+        .tree-node-level-2 .list-pf-item {
+          padding-left: 20px;
         }
-        aside {
-          float: right;
-          width: ~"calc(e('45% - 30px'))"; // lesshint-disable-line
-          height: 100%;
-          padding-left: (@grid-gutter-width/6);
-          padding-right: (@grid-gutter-width/6);
-          &:first-child,
-          &:nth-child(3) {
-            width: 10%;
-            padding: 0 (@grid-gutter-width/3);
-            span.fa {
-              width: 100%;
-              text-align: center;
-              padding: (@grid-gutter-width/6) 0;
-              margin: (@grid-gutter-width/6) 0;
-              font-size: @pf-icon-2x;
-            }
+        .tree-node-level-3 .list-pf-item {
+          padding-left: 40px;
+        }
+      }
+      &__settings {
+        position: relative;
+        right: 5px;
+        float: right;
+        &-dropdown {
+          width: 100%;
+          min-width: 400px;
+          height: 200px;
+          background-color: @color-pf-black-150;
+          &::after {
+            border-bottom-color: @color-pf-black-150;
+          }
+          aside {
+            float: right;
+            width: ~"calc(e('45% - 30px'))"; // lesshint-disable-line
+            height: 100%;
+            padding-left: (@grid-gutter-width/6);
+            padding-right: (@grid-gutter-width/6);
+            &:first-child,
             &:nth-child(3) {
-              margin-top: ((@grid-gutter-width/3)*5);
+              width: 10%;
+              padding: 0 (@grid-gutter-width/3);
+              span.fa {
+                width: 100%;
+                text-align: center;
+                padding: (@grid-gutter-width/6) 0;
+                margin: (@grid-gutter-width/6) 0;
+                font-size: @pf-icon-2x;
+              }
+              &:nth-child(3) {
+                margin-top: ((@grid-gutter-width/3)*5);
+              }
             }
           }
         }
-      }
-      &-column {
-        float: left;
-        width: 100%;
-        height: ~"calc(e('100% - 30px'))"; // lesshint-disable-line
-        padding: (@grid-gutter-width/3);
-        list-style: none;
-        background-color: @color-pf-white;
-        border: 1px solid;
-        border-color: @color-pf-black-300;
-        overflow-y: scroll;
-        li {
+        &-column {
+          float: left;
           width: 100%;
+          height: ~"calc(e('100% - 30px'))"; // lesshint-disable-line
+          padding: (@grid-gutter-width/3);
+          list-style: none;
+          background-color: @color-pf-white;
+          border: 1px solid;
+          border-color: @color-pf-black-300;
+          overflow-y: scroll;
+          li {
+            width: 100%;
+          }
+        }
+        .fa {
+          font-size: 16px;
         }
       }
-      .fa {
-        font-size: 16px;
-      }
-    }
-    .card-pf {
-      border: 0;
-      box-shadow: none;
-      .card-pf-title {
-        .no-wi {
-          font-size: @pf-icon-4x;
+      .card-pf {
+        border: 0;
+        box-shadow: none;
+        .card-pf-title {
+          .no-wi {
+            font-size: @pf-icon-4x;
+          }
         }
       }
     }
     &__quick-add-table {
       position: absolute;
+      float: left;
+      width: 100%;
     }
   }
-
   //Patternfly-ng's tree styles - Start
   .pfng-tree-list {
     .list-pf-item {
@@ -197,11 +200,7 @@
   }
 }
 
-button.btn.btn-link.dropdown-toggle:focus {
-  outline: none;
-}
-
-.planner-hack-title-truncate {
+.f8-planner-list-title {
   max-width: ~"calc(e('100% - 20px'))";// lesshint-disable-line
 }
 
@@ -214,7 +213,7 @@ a.disabled {
 }
 /// ng x-datatables css
 
-.cell-class {
+.f8-planner-table__cell {
   padding-top: 3px !important;
   padding-bottom: 3px !important;
 }
@@ -227,10 +226,11 @@ a.disabled {
     margin: 0;
   }
 }
-.header-cell {
-  font-weight: bold;
-  overflow: visible;
-  color: @color-pf-black-800;
+
+.f8-planner-table__header {
+  font-weight: bold !important;
+  overflow: visible !important;
+  color: @color-pf-black !important;
 }
 
 .datatable-row-detail {
@@ -250,7 +250,7 @@ a.disabled {
   bottom: 0;
   width: 100%;
 }
-a.quick-add-icon {
+.f8-planner__quick-add-icon {
   width: 100%;
   font-size: 16px;
   text-align: center;
@@ -284,10 +284,10 @@ a.quick-add-icon {
 // css to show icons on hover(quickAdd, quickPreview, detailPreview, dragHandle)
 .datatable-body-row:hover .table-dnd-container,
 .datatable-body-row.active .table-dnd-container,
-.datatable-body-row:hover .wi-detail-icon,
-.datatable-body-row.active .wi-detail-icon,
-.datatable-body-row:hover a.quick-add-icon,
-.datatable-body-row.active a.quick-add-icon {
+.datatable-body-row:hover .f8-planner__cell-detail-icon,
+.datatable-body-row.active .f8-planner__cell-detail-icon,
+.datatable-body-row:hover a.f8-planner__quick-add-icon,
+.datatable-body-row.active a.f8-planner__quick-add-icon {
   opacity: 1;
 }
 
@@ -311,25 +311,21 @@ a.quick-add-icon {
   overflow-x: visible !important;
 }
 
-.tree-icon {
+.f8-planner__tree-icon {
   min-width: 15px;
-  &.tree-icon__disabled {
+  &.is-disabled {
     opacity: .4;
     cursor: not-allowed;
   }
 }
-.icon-loader {
-  margin-left: -4px;
-  margin-right: 6px;
-}
 
-.table {
-  &-dnd-container {
+.f8-planner-table {
+  &__dnd {
     align-self: stretch;
     display: flex;
     opacity: 0;
   }
-  &-dnd-header {
+  &__dnd-header {
     &:before {
       background-image: linear-gradient(to bottom, @color-pf-blue-400 60%, @color-pf-white 0%);
       background-position: left;

@@ -4,17 +4,17 @@ import { WorkItemQuickPreview } from './workitem-quickpreview';
 
 export class WorkItemListEntry extends ui.BaseElement {
   cellSelector = $$('.datatable-body-cell');
-  inlineQuickAdd = new ui.Clickable(this.$('.quick-add-icon'), 'Inline quick add button');
+  inlineQuickAdd = new ui.Clickable(this.$('.f8-planner__quick-add-icon'), 'Inline quick add button');
   id = new ui.BaseElement(this.$('span.margin-0'), 'WorkItem ID');
   type = new ui.BaseElement(this.$('datatable-body-cell:nth-child(3) work-item-cell > div'), 'WorkItem Type');
   title = new ui.Clickable(this.$('.f8-planner__cell-title p'), 'WorkItem Title');
   labels = new ui.BaseElement(this.$('f8-label'), 'WorkItem Labels');
   inlineCloseButton = new ui.Clickable(this.$('.pficon-close'), 'inline close');
-  treeExpander = new ui.Clickable(this.$('.tree-icon'), 'WorkItem Expander');
-  labelName =  new ui.Clickable(this.element(by.cssContainingText('.label-name', 'sample_label_1')), 'WorkItem Label');
+  treeExpander = new ui.Clickable(this.$('.f8-planner__tree-icon'), 'WorkItem Expander');
+  labelName =  new ui.Clickable(this.element(by.cssContainingText('.f8-planner-label__name', 'sample_label_1')), 'WorkItem Label');
   detailIcon = new ui.Clickable(this.$('.f8-planner__cell-detail-icon a'), 'WorkItem detail page');
   iteration= new ui.BaseElement(this.$('#table-iteration'), 'Table Workitem Iteration Name');
-  creator = new ui.BaseElement(this.$('.user-assign-avatar'), 'Creator column');
+  creator = new ui.BaseElement(this.$('.f8-planner-user-avatar'), 'Creator column');
   assignees = new ui.BaseElement(this.$('f8-assignee'), 'Assignee column');
 
   constructor(element: ElementFinder, name: string) {

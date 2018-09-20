@@ -14,7 +14,7 @@ export class Iteration extends ui.BaseElement {
    'parent iteration dropdown'
   );
   createIterationButton = new ui.Button(this.iterationDialog.$('#create-iteration-button'), 'Create Iteration button');
-  datePickerDiv = new ui.BaseElement(this.$('.datepicker-container'), 'date picker div');
+  datePickerDiv = new ui.BaseElement(this.$('.f8-planner-itr__datepicker'), 'date picker div');
   private showStartDateCalendar = new ui.Clickable(this.datePickerDiv.$$('.selection.inputnoteditable').first(), 'start date calendar');
   private showEndDateCalendar = new ui.Clickable(this.datePickerDiv.$$('.selection.inputnoteditable').last(), 'End date calendar');
   calendarDiv = new ui.BaseElement(this.$('.selector.selectorarrow.selectorarrowleft'), '');

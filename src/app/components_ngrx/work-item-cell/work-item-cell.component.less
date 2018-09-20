@@ -1,25 +1,25 @@
-.type-icon {
-  min-width: 15px;
-}
-.wi-detail-title {
-  display: inline-flex;
-  width: ~"calc(e('100% - 20px'))"; // lesshint-disable-line
-}
+@import (reference) '../../../assets/stylesheets/_base';
 
-.wi-detail-icon {
-  width: 20px;
-  opacity: 0;
-  a {
-    font-size: 16px;
-    text-decoration: none;
+.f8-planner__cell {
+  &-icon-type {
+    min-width: 15px;
+    margin-right: 3px;
+    color: @color-pf-black-800;
   }
-}
-.bold {
-  font-weight: bold;
-}
-.assignees-cell {
-  .f8-assignees {
-    display: initial;
-    margin: 0 !important;
+  &-title,
+  &-query-title {
+    display: inline-block;
+    width: ~'calc(e("100% - 20px"))';
+  }
+  &-query-title {
+    width: ~'calc(e("100% - 50px"))';
+  }
+  &-detail-icon {
+    width: 20px;
+    opacity: 0;
+    a {
+      font-size: 16px;
+      text-decoration: none;
+    }
   }
 }
